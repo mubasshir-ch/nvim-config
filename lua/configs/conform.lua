@@ -8,12 +8,12 @@ local options = {
     javascript = { "prettier" },
     typescript = { "prettier" },
   },
-
+  timeout_ms = 5000,
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 500,
     lsp_fallback = true,
-    async = false
+    async = false,
   },
   formatters = {
     isort = {
@@ -23,7 +23,7 @@ local options = {
       },
     },
   },
-  notify_on_error = true
+  notify_on_error = true,
 }
 
 return options
