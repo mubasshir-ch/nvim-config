@@ -49,7 +49,7 @@ return {
     dependencies = {
       "nvim-telescope/telescope.nvim", -- Only needed if you want to use session lens
     },
-
+    bypass_save_filetypes = { "alpha", "dashboard" }, -- or whatever dashboard you use
     ---enables autocomplete for opts
     ---@module "auto-session"
     ---@type AutoSession.Config
@@ -281,6 +281,18 @@ return {
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
+    },
+  },
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+      require("dashboard").setup {
+        -- config
+      }
+    end,
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
     },
   },
 }
