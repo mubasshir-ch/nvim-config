@@ -260,14 +260,24 @@ return {
       },
     },
   },
+
   {
     "nvim-focus/focus.nvim",
     version = "*",
     lazy = false,
     opts = {
-      enabled = true,
+      enabled = false,
     },
+    config = function()
+      vim.keymap.set(
+        "n",
+        "<leader>ft",
+        "<cmd>FocusToggle<CR>",
+        { noremap = true, silent = true, desc = "Focus: Toggle" }
+      )
+    end,
   },
+
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -283,6 +293,7 @@ return {
       "rcarriga/nvim-notify",
     },
   },
+
   {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
@@ -294,5 +305,10 @@ return {
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
     },
+  },
+
+  {
+    "echasnovski/mini.icons",
+    version = false,
   },
 }

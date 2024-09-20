@@ -7,6 +7,7 @@ local options = {
     tex = { "latexindent" },
     javascript = { "prettier" },
     typescript = { "prettier" },
+    cpp = { "clang_format" },
   },
   timeout_ms = 5000,
   format_on_save = {
@@ -16,11 +17,9 @@ local options = {
     async = false,
   },
   formatters = {
-    isort = {
-      command = "isort",
-      args = {
-        "-",
-      },
+    clang_format = {
+        command = "clang-format",
+        prepend_args = { '--style={BasedOnStyle: llvm, IndentWidth: 4}'  },
     },
   },
   notify_on_error = true,

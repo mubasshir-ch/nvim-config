@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "texlab", "tsserver", "jsonls", "eslint", "tailwindcss", "lua_ls" }
+local servers = { "html", "cssls", "texlab", "tsserver", "jsonls", "eslint", "tailwindcss", "lua_ls", "sqlls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 local function on_attach(client, bufnr)
@@ -84,3 +84,36 @@ end, { desc = "Set basedpyright typeCheckingMode to strict" })
 vim.keymap.set("n", "<leader>pa", function()
   set_basedpyright_type_checking_mode("all", true)
 end, { desc = "Set basedpyright typeCheckingMode to all" })
+
+-- lsp for cpp (clangd)
+
+lspconfig.clangd.setup {
+  on_attach = on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = capabilities,
+  cmd = {
+    "clangd",
+    "--enable-config",
+    "--header-insertion=never",
+    "--query-driver=C:/src/msys64/ucrt64/bin/g++.exe",
+    "--compile-commands-dir=build",
+    "--clang-tidy",
+    "--all-scopes-completion",
+    "--completion-style=detailed",
+    "--function-arg-placeholders",
+    "--fallback-style=llvm",
+  },
+  filetypes = { "c", "cpp", "objc", "objcpp" },
+  root_dir = lspconfig.util.root_pattern(
+    ".clangd",
+    ".clang-tidy",
+    ".clang-format",
+    "compile_commands.json",
+    "compile_flags.txt",
+    "configure.ac",
+    ".git"
+  ),
+  init_options = {
+    compilationDatabasePath = ".",
+  },
+}
