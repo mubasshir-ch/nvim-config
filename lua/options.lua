@@ -21,12 +21,3 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.api.nvim_set_hl(0, "FoldColumn", { bg = "NONE" })
 
-local autocmd = vim.api.nvim_create_autocmd
-
-autocmd("VimEnter", {
-  command = ':silent !powershell -Command "Remove-TerminalPadding"',
-})
-
-autocmd("VimLeavePre", {
-  command = ':silent !powershell -Command "Restore-TerminalPadding"',
-})
