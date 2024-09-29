@@ -18,8 +18,8 @@ local options = {
   },
   formatters = {
     clang_format = {
-        command = "clang-format",
-        prepend_args = { '--style={BasedOnStyle: llvm, IndentWidth: 4}'  },
+      command = "clang-format",
+      prepend_args = { "--style={BasedOnStyle: llvm, IndentWidth: 4}" },
     },
   },
   notify_on_error = true,
