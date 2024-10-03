@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "texlab", "tsserver", "jsonls", "eslint", "tailwindcss", "lua_ls", "sqlls" }
+local servers = { "html", "cssls", "texlab", "tsserver", "jsonls", "eslint", "tailwindcss", "lua_ls", "sqlls", "gopls"}
 local nvlsp = require "nvchad.configs.lspconfig"
 
 local function on_attach(client, bufnr)

@@ -39,6 +39,8 @@ return {
         "python",
         "cpp",
         "latex",
+        "markdown",
+        "go",
       },
     },
   },
@@ -90,6 +92,9 @@ return {
 
       vim.g.vimtex_view_general_viewer = "SumatraPDF"
       vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
+      -- vim.g.tex_conceal = "abdmg"
+      -- vim.opt.conceallevel = 2
+      -- vim.opt.concealcursor = "nc"
       vim.g.vimtex_compiler_latexmk = {
         aux_dir = "aux-dir", -- create a directory called aux that will contain all the auxiliary files
         out_dir = "out-dir", -- create a directory called build that will contain all the build files
