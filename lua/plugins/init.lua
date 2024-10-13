@@ -3,7 +3,7 @@ return {
         "folke/which-key.nvim",
         lazy = false
     }, -- disable a default nvchad plugin
-    
+
 
     {
         "stevearc/conform.nvim",
@@ -260,10 +260,10 @@ return {
             end,
         },
         keys = {
-            { mode = {"n"}, "zR", "<cmd>lua require('ufo').openAllFolds()<cr>",  desc = "Open all folds" },
-            { mode = {"n"}, "zM", "<cmd>lua require('ufo').closeAllFolds()<cr>", desc = "Close all folds" },
+            { mode = { "n" }, "zR", "<cmd>lua require('ufo').openAllFolds()<cr>",  desc = "Open all folds" },
+            { mode = { "n" }, "zM", "<cmd>lua require('ufo').closeAllFolds()<cr>", desc = "Close all folds" },
             {
-                mode = {"n"},
+                mode = { "n" },
                 "zK",
                 function()
                     local winId = require("ufo").peekFoldedLinesUnderCursor()
@@ -384,4 +384,31 @@ return {
         "sindrets/diffview.nvim",
         event = "BufRead",
     },
+    {
+        "nvchad/volt",
+        lazy = true
+    },
+    {
+        "nvchad/menu",
+        lazy = false,
+        config = function()
+            -- Keyboard users
+            vim.keymap.set("n", "<C-m>", function()
+                require("menu").open("default")
+            end, {})
+
+            -- mouse users + nvimtree users!
+            vim.keymap.set("n", "<RightMouse>", function()
+                vim.cmd.exec '"normal! \\<RightMouse>"'
+
+                local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+                require("menu").open(options, { mouse = true })
+            end, {}) -- config
+        end,
+    },
+
+    {
+        "nvchad/minty",
+        cmd = { "Shades", "Huefy" },
+    }
 }
