@@ -21,3 +21,12 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.api.nvim_set_hl(0, "FoldColumn", { bg = "NONE" })
 
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+    pattern = "*",
+    callback = function()
+        if vim.fn.mode() ~= 'c' then
+            vim.cmd("checktime")
+        end
+    end,
+})
