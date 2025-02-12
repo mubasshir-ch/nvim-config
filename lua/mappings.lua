@@ -45,7 +45,7 @@ map("n", "<C-B>", function()
             local ft_cmds = {
                 python = "python3 " .. file,
                 cpp = "clear && g++ --std=c++17 -DLOCAL -Wall -Wextra -Wshadow -O2 -lm -o " .. fNoExt .. " " ..
-                    file .. " && " .. fNoExt .. " <in.txt | tee out.txt",
+                    file .. " && ./" .. fNoExt .. " <in.txt | tee out.txt",
             }
             -- print(ft_cmds["cpp"])
 
