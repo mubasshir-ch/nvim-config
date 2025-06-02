@@ -4,10 +4,29 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "texlab", "ts_ls", "jsonls", "eslint", "tailwindcss", "lua_ls", "sqlls", "gopls"}
+local servers = {
+  "html",
+  "cssls",
+  "texlab",
+  "ts_ls",
+  "jsonls",
+  "eslint",
+  "tailwindcss",
+  "lua_ls",
+  "sqlls",
+  "gopls",
+  "rust_analyzer",
+  "prismals",
+}
 local nvlsp = require "nvchad.configs.lspconfig"
 
 local function on_attach(client, bufnr)
+  -- disable clangd formatting
+  if client.name == "clangd" then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end
+
   if client.server_capabilities.inlayHintProvider then
     vim.lsp.inlay_hint.enable(true)
   end
@@ -95,13 +114,12 @@ lspconfig.clangd.setup {
     "clangd",
     "--enable-config",
     "--header-insertion=never",
-    "--query-driver=C:/src/msys64/ucrt64/bin/g++.exe",
-    "--compile-commands-dir=build",
+    "--query-driver=/usr/bin/gcc", -- Specify the GCC driver
     "--clang-tidy",
     "--all-scopes-completion",
     "--completion-style=detailed",
     "--function-arg-placeholders",
-    "--fallback-style=llvm",
+    "--fallback-style={BasedOnStyle: LLVM, IndentWidth: 4}",
   },
   filetypes = { "c", "cpp", "objc", "objcpp" },
   root_dir = lspconfig.util.root_pattern(
@@ -113,7 +131,4 @@ lspconfig.clangd.setup {
     "configure.ac",
     ".git"
   ),
-  init_options = {
-    compilationDatabasePath = ".",
-  },
 }
